@@ -18,6 +18,7 @@ zip_code VARCHAR(6) NOT NULL,
 username VARCHAR(200) NOT NULL UNIQUE,
 password varchar (200) NOT NULL,
 created_at int(11) NOT NULL,
-updated_at int(11) 
+updated_at int(11),
+deleted_at int(11)
 );
 

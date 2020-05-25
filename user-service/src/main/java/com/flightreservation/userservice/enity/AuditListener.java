@@ -1,9 +1,9 @@
 package com.flightreservation.userservice.enity;
 
-import java.util.Date;
-
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+
+import com.flightreservation.userservice.utility.Utility;
 
 public class AuditListener {
 
@@ -15,7 +15,7 @@ public class AuditListener {
 			audit = new Audit();
 			auditable.setAudit(audit);
 		}
-		audit.setCreatedAt(getEpochTime());
+		audit.setCreatedAt(Utility.getEpochTime());
 //        audit.setCreatedBy(LoggedUser.get());
 	}
 
@@ -23,14 +23,8 @@ public class AuditListener {
 	public void setUpdatedOn(Auditable auditable) {
 
 		Audit audit = auditable.getAudit();
-		audit.setUpdatedAt(getEpochTime());
+		audit.setUpdatedAt(Utility.getEpochTime());
 //		audit.setUpdatedBy(LoggedUser.get());
-	}
-
-	private long getEpochTime() {
-		Date currentDate = new Date();
-		long epochTime = currentDate.getTime() / 1000;
-		return epochTime;
 	}
 
 }

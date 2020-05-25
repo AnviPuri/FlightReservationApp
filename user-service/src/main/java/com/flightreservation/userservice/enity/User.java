@@ -34,6 +34,8 @@ public class User implements Auditable {
 	@Embedded
 	private Audit audit;
 
+	private long deletedAt;
+
 	public int getId() {
 		return id;
 	}
@@ -98,6 +100,14 @@ public class User implements Auditable {
 	@Override
 	public void setAudit(Audit audit) {
 		this.audit = audit;
+	}
+
+	public long getDeletedAt() {
+		return deletedAt;
+	}
+
+	public void setDeletedAt(long deletedAt) {
+		this.deletedAt = deletedAt;
 	}
 
 }

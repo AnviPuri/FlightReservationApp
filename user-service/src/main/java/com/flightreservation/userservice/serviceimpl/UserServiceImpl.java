@@ -10,6 +10,7 @@ import com.flightreservation.userservice.dtos.UserDTO;
 import com.flightreservation.userservice.enity.User;
 import com.flightreservation.userservice.repo.UserRepository;
 import com.flightreservation.userservice.service.UserService;
+import com.flightreservation.userservice.utility.Utility;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -21,8 +22,6 @@ public class UserServiceImpl implements UserService {
 	private ModelMapper modelMapper;
 
 	private User user;
-
-	private User updatedUser;
 
 	@Override
 	public UserDTO createUser(UserDTO userDTO) {
@@ -37,18 +36,20 @@ public class UserServiceImpl implements UserService {
 	public UserDTO updateUser(UserDTO userDTO, int id) {
 
 		user = modelMapper.map(userDTO, User.class);
-		if (userDTO.getId() != id) {
-			// Return an exception for id not matching -Exception Handling to be done later
-		}
 		Optional<User> presentUser = userRepo.findById(id);
-		if (!presentUser.isPresent()) {
-			// return an exception for no object present for that id - Exception Handling to
-			// be done later
-		}
 		user.setAudit(presentUser.get().getAudit());
-		updatedUser = userRepo.save(user);
+		User updatedUser = userRepo.save(user);
 		userDTO = modelMapper.map(updatedUser, UserDTO.class);
 		return userDTO;
+	}
+
+	@Override
+	public void softDeleteUser(int id) {
+
+		Optional<User> presentUser = userRepo.findById(id);
+		user = presentUser.get();
+		user.setDeletedAt(Utility.getEpochTime());
+		userRepo.save(user);
 	}
 
 }
