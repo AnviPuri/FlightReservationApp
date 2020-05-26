@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.flightreservation.userservice.dtos.UserDTO;
@@ -23,10 +24,14 @@ public class UserServiceImpl implements UserService {
 
 	private User user;
 
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
 	@Override
 	public UserDTO createUser(UserDTO userDTO) {
 
 		user = modelMapper.map(userDTO, User.class);
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user = userRepo.save(user);
 		userDTO = modelMapper.map(user, UserDTO.class);
 		return userDTO;
