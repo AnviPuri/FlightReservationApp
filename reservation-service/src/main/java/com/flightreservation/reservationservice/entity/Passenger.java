@@ -9,6 +9,36 @@ public class Passenger {
 	// a reservation can have many passengers - one to many
 	private Reservation reservation;
 
+	@Embedded
+	private Name name;
+
+	private int age;
+
+	private String gender;
+
+	private String email;
+
+	@Embedded
+	private Phone phone;
+
+	@Embedded
+	private Address address;
+
+	@Embedded
+	private Extras extras;
+
+	@Embedded
+	private Audit audit;
+
+	//cancelled/ booked
+	private String status;
+
+	private long cancelledAt;
+
+	private int cancelledBy;
+
+	private String cancellationReason;
+
 	public int getId() {
 		return id;
 	}
@@ -33,6 +63,22 @@ public class Passenger {
 		this.name = name;
 	}
 
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -41,11 +87,11 @@ public class Passenger {
 		this.email = email;
 	}
 
-	public String getPhone() {
+	public Phone getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public void setPhone(Phone phone) {
 		this.phone = phone;
 	}
 
@@ -57,12 +103,12 @@ public class Passenger {
 		this.address = address;
 	}
 
-	public String getSpecialNeeds() {
-		return specialNeeds;
+	public Extras getExtras() {
+		return extras;
 	}
 
-	public void setSpecialNeeds(String specialNeeds) {
-		this.specialNeeds = specialNeeds;
+	public void setExtras(Extras extras) {
+		this.extras = extras;
 	}
 
 	public Audit getAudit() {
@@ -73,29 +119,36 @@ public class Passenger {
 		this.audit = audit;
 	}
 
-	public long getDeletedAt() {
-		return deletedAt;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setDeletedAt(long deletedAt) {
-		this.deletedAt = deletedAt;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	@Embedded
-	private Name name;
+	public long getCancelledAt() {
+		return cancelledAt;
+	}
 
-	private String email;
+	public void setCancelledAt(long cancelledAt) {
+		this.cancelledAt = cancelledAt;
+	}
 
-	private String phone;
+	public int getCancelledBy() {
+		return cancelledBy;
+	}
 
-	@Embedded
-	private Address address;
+	public void setCancelledBy(int cancelledBy) {
+		this.cancelledBy = cancelledBy;
+	}
 
-	private String specialNeeds;
+	public String getCancellationReason() {
+		return cancellationReason;
+	}
 
-	@Embedded
-	private Audit audit;
-
-	private long deletedAt;
+	public void setCancellationReason(String cancellationReason) {
+		this.cancellationReason = cancellationReason;
+	}
 
 }

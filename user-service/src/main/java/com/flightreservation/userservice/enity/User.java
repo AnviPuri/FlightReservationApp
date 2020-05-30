@@ -19,10 +19,15 @@ public class User implements Auditable {
 
 	@Embedded
 	private Name name;
+	
+	private int age;
+	
+	private String gender;
 
 	private String email;
 
-	private String phone;
+	@Embedded
+	private Phone phone;
 
 	@Embedded
 	private Address address;
@@ -34,7 +39,11 @@ public class User implements Auditable {
 	@Embedded
 	private Audit audit;
 
-	private long deletedAt;
+	private String status;
+
+	private long deactivatedAt;
+
+	private int deactivatedBy;
 
 	public int getId() {
 		return id;
@@ -60,11 +69,11 @@ public class User implements Auditable {
 		this.email = email;
 	}
 
-	public String getPhone() {
+	public Phone getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public void setPhone(Phone phone) {
 		this.phone = phone;
 	}
 
@@ -102,12 +111,28 @@ public class User implements Auditable {
 		this.audit = audit;
 	}
 
-	public long getDeletedAt() {
-		return deletedAt;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setDeletedAt(long deletedAt) {
-		this.deletedAt = deletedAt;
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public long getDeactivatedAt() {
+		return deactivatedAt;
+	}
+
+	public void setDeactivatedAt(long deactivatedAt) {
+		this.deactivatedAt = deactivatedAt;
+	}
+
+	public int getDeactivatedBy() {
+		return deactivatedBy;
+	}
+
+	public void setDeactivatedBy(int deactivatedBy) {
+		this.deactivatedBy = deactivatedBy;
 	}
 
 }

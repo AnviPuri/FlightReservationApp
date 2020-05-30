@@ -53,7 +53,8 @@ public class UserServiceImpl implements UserService {
 
 		Optional<User> presentUser = userRepo.findById(id);
 		user = presentUser.get();
-		user.setDeletedAt(Utility.getEpochTime());
+		user.setDeactivatedAt(Utility.getEpochTime());
+		//add deactivatedBy as well - TO DO LATER
 		userRepo.save(user);
 	}
 
